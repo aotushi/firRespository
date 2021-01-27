@@ -15,26 +15,36 @@
             </nav>
             <div class="sort">
                 <div class="all-sort-list2">
-                    <div class="item" v-for="c1 in categoryList" :key="c1.categoryId">
+                    <div
+                        class="item"
+                        v-for="c1 in categoryList"
+                        :key="c1.categoryId"
+                    >
                         <h3>
-                            <a href="">{{c1.categoryName}}</a>
+                            <a href="">{{ c1.categoryName }}</a>
                         </h3>
                         <div class="item-list clearfix">
                             <div class="subitem">
-                                <dl class="fore" v-for="c2 in c1.categoryChild" :key="c2.categoryId">
+                                <dl
+                                    class="fore"
+                                    v-for="c2 in c1.categoryChild"
+                                    :key="c2.categoryId"
+                                >
                                     <dt>
-                                        <a href="">{{c2.categoryName}}</a>
+                                        <a href="">{{ c2.categoryName }}</a>
                                     </dt>
                                     <dd>
-                                        <em v-for="c3 in c2.categoryChild" :key="c3.categoryId">
-                                            <a href="">{{c3.categoryName}}</a>
+                                        <em
+                                            v-for="c3 in c2.categoryChild"
+                                            :key="c3.categoryId"
+                                        >
+                                            <a href="">{{ c3.categoryName }}</a>
                                         </em>
                                     </dd>
                                 </dl>
                             </div>
                         </div>
                     </div>
-                    
                 </div>
             </div>
         </div>
@@ -42,7 +52,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState } from "vuex";
 export default {
     name: "TypeNav",
     mounted() {
@@ -53,8 +63,8 @@ export default {
     //以后只要从vuex拿的是方法(mutations和actions当中的东西)，都在methods当中去拿，一般用的很少
     computed: {
         ...mapState({
-            categoryList:state=>state.home.categoryList
-        })
+            categoryList: (state) => state.home.categoryList,
+        }),
     },
 };
 </script>
@@ -163,8 +173,8 @@ export default {
                                         padding: 0 8px;
                                         margin-top: 5px;
                                         border-left: 1px solid #ccc;
-                                        &:hover{
-                                            background:#ddd;
+                                        &:hover {
+                                            background: #ddd;
                                         }
                                     }
                                 }
@@ -173,7 +183,7 @@ export default {
                     }
 
                     &:hover {
-                        background:#ddd;
+                        background: #ddd;
                         .item-list {
                             display: block;
                         }
