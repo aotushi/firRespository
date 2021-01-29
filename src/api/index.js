@@ -1,6 +1,5 @@
 // 请求接口函数
 
-import axios from 'axios';
 import request from './ajax';
 
 //请求三级分类列表数据  api/product/getBaseCategoryList  GET 无参
