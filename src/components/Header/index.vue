@@ -70,11 +70,15 @@ export default {
     methods: {
         toSearch() {
             // this.$router.push("/search/"+this.keyWord+"?keyWord1"+'='+this.keyWord.toUpperCase());
-            this.$router.push({
+            // query参数+params参数合并
+            let location={
                 name:'search',
-                // params:{keyword:'aa'},
-                query:{keyword1:this.keyWord.toUpperCase()}
-            })
+                params:{keyword:this.keyWord}
+            }
+            if(this.$route.query){
+                location.query=this.$route.query;
+            }
+            this.$router.push(location);
         },
     },
 };

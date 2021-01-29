@@ -63,8 +63,8 @@ hr {
 html { overflow-y: scroll; }
 
 a:hover{
-    color : rgb(79, 76, 212) !important;
-    text-decoration: underline;
+    color : #e1251b !important;
+    text-decoration: none;
 }
 
 /* 清除浮动 */

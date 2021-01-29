@@ -14,15 +14,15 @@ const router=new VueRouter({
             path:'/login',
             component:Login,
             meta:{
-                isHidden:true
+                isHidden:false
             }
         },
         {
-            path:'/search/:keyWord?',
+            path:'/search/:keyword?',
             name:'search',
             component:Search,
             meta:{
-                isHidden:true
+                isHidden:false
             }
         },
         {
