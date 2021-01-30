@@ -4,28 +4,7 @@
         <div class="sortList clearfix">
             <div class="center">
                 <!--banner轮播-->
-                <div class="swiper-container" id="mySwiper">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <img src="./images/banner1.jpg" />
-                        </div>
-                        <!-- <div class="swiper-slide">
-                            <img src="./images/banner2.jpg" />
-                        </div>
-                        <div class="swiper-slide">
-                            <img src="./images/banner3.jpg" />
-                        </div>
-                        <div class="swiper-slide">
-                            <img src="./images/banner4.jpg" />
-                        </div> -->
-                    </div>
-                    <!-- 如果需要分页器 -->
-                    <div class="swiper-pagination"></div>
-
-                    <!-- 如果需要导航按钮 -->
-                    <div class="swiper-button-prev"></div>
-                    <div class="swiper-button-next"></div>
-                </div>
+                <SlideLoop :bannerList="bannerList" />
             </div>
             <div class="right">
                 <div class="news">
@@ -116,8 +95,56 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+import SlideLoop from "@/components/SlideLoop";
+
 export default {
     name: "ListContainer",
+    components: { SlideLoop },
+    mounted() {
+        this.$store.dispatch("getBannerList");
+        // mounted中放入swiper实例化函数缺点: dispatch是异步函数,swiper是同步函数会先执行, 但其执行前提是页面结构内容完成
+        // 但页面加载完成后,页面显示不一定成功. 所以要保证动态数据请求回来之后再去实例化.
+        // 实例化作用的样式(第一个参数),因为ListContainer和floor组件v-for循环的轮播图样式名称一致,所以需要给标签添加ref属性
+    },
+    computed: {
+        ...mapState({
+            bannerList: (state) => state.home.bannerList,
+        }),
+    },
+    // updated() {},
+    // 第一种: 定时器
+    // 第二种: 解决swiper无法在页面数据加载完成后实例化  nextTick是在最近的一次更新dom之后会立即调用传入nextTick的回调函数
+    // 第三种: 模块化: 将多个组件内相同的html/css/js提出, 变成一个组件
+    // watch: {
+    //     bannerList: {
+    //         immediate:true,
+    //         handler() {
+    //             this.$nextTick(() => {
+    //                 new Swiper(this.$refs.bannerSwiper, {
+    //                     // direction: "vertical", // 垂直切换选项
+    //                     loop: true, // 循环模式选项
+
+    //                     // 如果需要分页器
+    //                     pagination: {
+    //                         el: ".swiper-pagination",
+    //                     },
+
+    //                     // 如果需要前进后退按钮
+    //                     navigation: {
+    //                         nextEl: ".swiper-button-next",
+    //                         prevEl: ".swiper-button-prev",
+    //                     },
+
+    //                     // 如果需要滚动条
+    //                     // scrollbar: {
+    //                     //     el: ".swiper-scrollbar",
+    //                     // },
+    //                 });
+    //             });
+    //         },
+    //     },
+    // },
 };
 </script>
 

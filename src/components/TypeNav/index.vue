@@ -124,7 +124,7 @@ export default {
                 this.currentIndex = index;
                 console.log(index);
             },
-            20,
+            5,
             { trailing: false }
         ),
         // 事件委托函数,代替声明和编程路由导航造成的卡顿
@@ -160,7 +160,9 @@ export default {
         // 鼠标移出(列表显示+下级目录显示(初始值-1))
         moveOutItem(){
             this.currentIndex = -1;
-            this.isShow=false;
+            if(this.$route.path !== '/home'){
+                this.isShow=false;
+            }
         }
     },
     mounted() {

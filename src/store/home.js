@@ -1,8 +1,10 @@
 //home模块的vuex模块
-import {reqCategoryList} from '@/api';
+import {reqCategoryList, reqBannerList, reqFloorList} from '@/api';
 
 const state={
-    categoryList:[]
+    categoryList:[],
+    bannerList:[],
+    floorList:[]
 };
 
 const actions={
@@ -11,12 +13,31 @@ const actions={
         if(result.code === 200){
             commit('RECEIVE_CATEGORYLIST', result.data);
         }
+    },
+    async getBannerList({commit}){
+        let result = await reqBannerList();
+        if(result.code===200){
+            commit('RECEIVE_BANNERLIST', result.data);
+            console.log(result.data)
+        }
+    },
+    async getFloorList({commit}){
+        let result=await reqFloorList();
+        if(result.code===200){
+            commit('RECEIVE_FLOORLIST', result.data);
+        }
     }
 };
 
 const mutations={
     RECEIVE_CATEGORYLIST(state, categoryList){
         state.categoryList=categoryList;
+    },
+    RECEIVE_BANNERLIST(state, bannerList){
+        state.bannerList=bannerList;
+    },
+    RECEIVE_FLOORLIST(state, value){
+        state.floorList=value;
     }
 };
 
