@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import home from './home';
 import user from './user';
+import search from './search';
 
 Vue.use(Vuex);
 
@@ -30,7 +31,8 @@ const store=new Vuex.Store({
     getters,
     modules:{
         home,
-        user
+        user,
+        search
     }
 });
 

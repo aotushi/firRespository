@@ -31,5 +31,13 @@ export const reqFloorList=()=>{
 //验证请求是否成功的两种方式: 1.引入到main中,在这里直接调用; 2.main中引入并调用
 // reqCategoryList();
 
-reqBannerList();
-reqFloorList();
+// reqBannerList();
+// reqFloorList();
+
+export const reqSearchInfo=(searchParams)=>{
+    return request({
+        url:'/list',
+        method:'post',
+        data:searchParams
+    })
+};
