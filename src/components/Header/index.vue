@@ -42,7 +42,7 @@
                             type="text"
                             id="autocomplete"
                             class="input-error input-xxlarge"
-                            v-model="keyWord"
+                            v-model="keyword"
                         />
                         <button
                             class="sui-btn btn-xlarge btn-danger"
@@ -63,23 +63,30 @@ export default {
     name: "Header",
     data(){
         return{
-            keyWord:'',
-            // keyWord1:''
+            keyword:'',
+            // keyword1:''
         }
+    },
+    mounted(){
+        this.$bus.$on('clearKeyword', this.clearKeyword);
     },
     methods: {
         toSearch() {
-            // this.$router.push("/search/"+this.keyWord+"?keyWord1"+'='+this.keyWord.toUpperCase());
+            // this.$router.push("/search/"+this.keyword+"?keyword1"+'='+this.keyword.toUpperCase());
             // query参数+params参数合并
             let location={
                 name:'search',
-                params:{keyword:this.keyWord}
+                params:{keyword:this.keyword||undefined}
             }
             if(this.$route.query){
                 location.query=this.$route.query;
             }
             this.$router.push(location);
         },
+        clearKeyword(){
+            this.keyword="";
+        }
+        
     },
 };
 </script>

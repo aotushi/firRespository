@@ -8,6 +8,27 @@ import Registry from '@/pages/Registry';
 
 Vue.use(VueRouter);
 
+const originPush=VueRouter.prototype.push;
+const originReplace=VueRouter.prototype.replace;
+
+VueRouter.prototype.push=function(location, onResolve, onRejected){
+    if(onResolve===undefined && onRejected===undefined){
+        return originPush.call(this, location).catch(()=>{});
+    }else{
+        // return originPush.call(this, location, onResolve, onRejected);
+        return VueRouter.prototype.push(location, onResolve, onRejected);
+    }
+}
+
+VueRouter.prototype.replace=function(location, onResolve, onRejected){
+    if(onResolve===undefined && onRejected===undefined){
+        return originReplace.call(this, location).catch(()=>{});
+    }else{
+        // return originReplace.call(this, location, onResolve, onRejected);
+        return VueRouter.prototype.replace(location, onResolve, onRejected);
+    }
+}
+
 const router=new VueRouter({
     routes:[
         {   

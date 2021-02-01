@@ -11,6 +11,9 @@ Vue.component('TypeNav', TypeNav);
 Vue.config.productionTip=false;
 
 new Vue({
+  beforeCreate(){
+    Vue.prototype.$bus=this;
+  },
   el:'#app',
   router,
   store,

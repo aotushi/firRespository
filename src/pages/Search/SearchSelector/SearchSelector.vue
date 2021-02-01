@@ -4,7 +4,7 @@
       <div class="fl key brand">品牌</div>
       <div class="value logos">
         <ul class="logo-list">
-          <li v-for="(trademark, index) in trademarkList" :key="trademark.tmId">{{trademark.tmName}}</li>
+          <li v-for="(trademark, index) in trademarkList" :key="trademark.tmId" @click=searchForTrademark(trademark)>{{trademark.tmName}}</li>
         </ul>
       </div>
       <!-- <div class="ext">
@@ -17,99 +17,11 @@
       <div class="fl value">
         <ul class="type-list">
           <li v-for="(attrValue, index) in attr.attrValueList" :key=index>
-            <a>{{attrValue}}</a>
+            <a href="javascript:;" @click="searchForProps(attrValue, attr)">{{attrValue}}</a>
           </li>
         </ul>
       </div>
       <div class="fl ext"></div>
-    </div>
-    <div class="type-wrap">
-      <div class="fl key">显示屏尺寸</div>
-      <div class="fl value">
-        <ul class="type-list">
-          <li>
-            <a>4.0-4.9英寸</a>
-          </li>
-          <li>
-            <a>4.0-4.9英寸</a>
-          </li>
-        </ul>
-      </div>
-      <div class="fl ext"></div>
-    </div>
-    <div class="type-wrap">
-      <div class="fl key">摄像头像素</div>
-      <div class="fl value">
-        <ul class="type-list">
-          <li>
-            <a>1200万以上</a>
-          </li>
-          <li>
-            <a>800-1199万</a>
-          </li>
-          <li>
-            <a>1200-1599万</a>
-          </li>
-          <li>
-            <a>1600万以上</a>
-          </li>
-          <li>
-            <a>无摄像头</a>
-          </li>
-        </ul>
-      </div>
-      <div class="fl ext"></div>
-    </div>
-    <div class="type-wrap">
-      <div class="fl key">价格</div>
-      <div class="fl value">
-        <ul class="type-list">
-          <li>
-            <a>0-500元</a>
-          </li>
-          <li>
-            <a>500-1000元</a>
-          </li>
-          <li>
-            <a>1000-1500元</a>
-          </li>
-          <li>
-            <a>1500-2000元</a>
-          </li>
-          <li>
-            <a>2000-3000元 </a>
-          </li>
-          <li>
-            <a>3000元以上</a>
-          </li>
-        </ul>
-      </div>
-      <div class="fl ext">
-      </div>
-    </div>
-    <div class="type-wrap">
-      <div class="fl key">更多筛选项</div>
-      <div class="fl value">
-        <ul class="type-list">
-          <li>
-            <a>特点</a>
-          </li>
-          <li>
-            <a>系统</a>
-          </li>
-          <li>
-            <a>手机内存 </a>
-          </li>
-          <li>
-            <a>单卡双卡</a>
-          </li>
-          <li>
-            <a>其他</a>
-          </li>
-        </ul>
-      </div>
-      <div class="fl ext">
-      </div>
     </div>
   </div>
 </template>
@@ -120,6 +32,16 @@ import { mapGetters } from 'vuex'
     name: 'SearchSelector',
     computed:{
       ...mapGetters(['attrsList', 'trademarkList'])
+    },
+    methods:{
+      // 给父组件传递品牌, 使用自定义事件
+      searchForTrademark(trademark){
+        this.$emit('searchForTrademark', trademark);
+      },
+      // 给父组件传递品牌属性, 使用自定义事件
+      searchForProps(attrValue, attr){
+        this.$emit('searchForProps', attrValue, attr);
+      }
     }
   }
 </script>
