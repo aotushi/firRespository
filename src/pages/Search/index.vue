@@ -80,35 +80,13 @@
               </li>
             </ul>
           </div>
-          <div class="fr page">
-            <div class="sui-pagination clearfix">
-              <ul>
-                <li class="prev disabled">
-                  <a href="#">«上一页</a>
-                </li>
-                <li class="active">
-                  <a href="#">1</a>
-                </li>
-                <li>
-                  <a href="#">2</a>
-                </li>
-                <li>
-                  <a href="#">3</a>
-                </li>
-                <li>
-                  <a href="#">4</a>
-                </li>
-                <li>
-                  <a href="#">5</a>
-                </li>
-                <li class="dotted"><span>...</span></li>
-                <li class="next">
-                  <a href="#">下一页»</a>
-                </li>
-              </ul>
-              <div><span>共10页&nbsp;</span></div>
-            </div>
-          </div>
+          <Pagination
+            :currentPageNo="searchParams.pageNo"
+            :pageSize="searchParams.pageSize"
+            :total="searchInfo.total"
+            :continueNo="5"
+            @changePage="changePage"
+          ></Pagination>
         </div>
       </div>
     </div>
@@ -116,7 +94,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapState } from "vuex";
 import SearchSelector from "./SearchSelector/SearchSelector";
 export default {
   name: "Search",
@@ -136,8 +114,8 @@ export default {
 
         // 默认搜索条件
         order: "1:asc",
-        pageNo: 1,
-        pageSize: 10,
+        pageNo: 5,
+        pageSize: 5,
       },
     };
   },
@@ -185,6 +163,9 @@ export default {
       this.searchParams.category2Id=undefined;
       this.searchParams.category3Id=undefined;
       this.searchParams.categoryName=undefined;
+
+      // 底部页码归1
+      this.searchParams.pageNo=1;
       this.$router.replace({name:'search', params:this.$route.params});
     },
     // 点击删除url的params数据,并push更新信息
@@ -192,16 +173,22 @@ export default {
       this.searchParams.keyword=undefined;
       // 通知header组件清空关键字
       this.$bus.$emit('clearKeyword');
+      // 底部页码归1
+      this.searchParams.pageNo=1;
       this.$router.replace({name:'search', query:this.$route.query});
     },
     // 自定义事件.子组件向父组件传递点击的品牌数据
     searchForTrademark(trademark){
       this.searchParams.trademark=`${trademark.tmId}:${trademark.tmName}`;
+      // 底部页码归1
+      this.searchParams.pageNo=1;
       this.getSearchInfo();
     },
     // 点击删除品牌名称,重新发送请求
     removeTrademark(){
       this.searchParams.trademark=undefined;
+      // 底部页码归1
+      this.searchParams.pageNo=1;
       this.getSearchInfo();
     },
     // 自定义事件. 子组件向父组件传递点击的品牌属性
@@ -211,11 +198,15 @@ export default {
       let isRepeate=this.searchParams.props.some(item=>item===prop);
       if(isRepeate) return ;
       this.searchParams.props.push(prop);
+      // 底部页码归1
+      this.searchParams.pageNo=1;
       this.getSearchInfo();
     },
     // 点击删除品牌属性,重新发送请求
     removeProp(index){
       this.searchParams.props.splice(index,1);
+      // 底部页码归1
+      this.searchParams.pageNo=1;
       this.getSearchInfo();
     },
     // 点击'综合'与'价格'进行排序:
@@ -228,12 +219,23 @@ export default {
       }else{
         this.searchParams.order=`${sortFlag}:desc`
       }
+      // 底部页码归1
+      this.searchParams.pageNo=1;
+      this.getSearchInfo();
+    },
+    // 点击底部页码,跳转页面
+    changePage(page){
+      this.searchParams.pageNo=page;
       this.getSearchInfo();
     }
   },
 
   computed: {
     ...mapGetters(["goodsList"]),
+    // 获取total, totalPages
+    ...mapState({
+      searchInfo:state=>state.search.searchInfo
+    }),
     sortFlag(){
       return this.searchParams.order.split(':')[0];
     },

@@ -6,8 +6,10 @@ import '@/api';
 import store from '@/store';
 import '@/mock/mockServer';
 import 'swiper/css/swiper.css';
+import Pagination from '@/components/Pagination';
 
 Vue.component('TypeNav', TypeNav);
+Vue.component('Pagination', Pagination);
 Vue.config.productionTip=false;
 
 new Vue({
