@@ -26,23 +26,11 @@
           <div class="sui-navbar">
             <div class="navbar-inner filter">
               <ul class="sui-nav">
-                <li class="active">
-                  <a href="#">综合</a>
+                <li :class="{active: sortFlag==='1'}">
+                  <a href="javascript:;" @click="changeSort('1')">综合<i v-if="sortFlag==='1' " class="iconfont" :class="{icondown:sortType==='desc', iconup:sortType==='asc'}"></i></a>
                 </li>
-                <li>
-                  <a href="#">销量</a>
-                </li>
-                <li>
-                  <a href="#">新品</a>
-                </li>
-                <li>
-                  <a href="#">评价</a>
-                </li>
-                <li>
-                  <a href="#">价格⬆</a>
-                </li>
-                <li>
-                  <a href="#">价格⬇</a>
+                <li :class="{active: sortFlag==='2'}">
+                  <a href="javascript:;" @click="changeSort('2')">价格<i v-if="sortFlag==='2' " class="iconfont" :class="{icondown:sortType==='desc', iconup:sortType==='asc'}"></i></a>
                 </li>
               </ul>
             </div>
@@ -147,7 +135,7 @@ export default {
         trademark: "",
 
         // 默认搜索条件
-        order: "1:desc",
+        order: "1:asc",
         pageNo: 1,
         pageSize: 10,
       },
@@ -181,6 +169,13 @@ export default {
         categoryName,
         keyword,
       };
+      // 删除所有空字符串,不发送请求,节省带宽.
+      Object.keys(searchParams).forEach((key)=>{
+        if(Object[key]===''){
+          // Object[key]=undefined;
+          delete searchParams[key];
+        }
+      })
       this.searchParams = searchParams;
     },
 
@@ -190,14 +185,14 @@ export default {
       this.searchParams.category2Id=undefined;
       this.searchParams.category3Id=undefined;
       this.searchParams.categoryName=undefined;
-      this.$router.push({name:'search', params:this.$route.params});
+      this.$router.replace({name:'search', params:this.$route.params});
     },
     // 点击删除url的params数据,并push更新信息
     removeKeyword(){
       this.searchParams.keyword=undefined;
       // 通知header组件清空关键字
       this.$bus.$emit('clearKeyword');
-      this.$router.push({name:'search', query:this.$route.query});
+      this.$router.replace({name:'search', query:this.$route.query});
     },
     // 自定义事件.子组件向父组件传递点击的品牌数据
     searchForTrademark(trademark){
@@ -222,11 +217,29 @@ export default {
     removeProp(index){
       this.searchParams.props.splice(index,1);
       this.getSearchInfo();
+    },
+    // 点击'综合'与'价格'进行排序:
+    changeSort(sortFlag){
+      let originSortFlag=this.searchParams.order.split(':')[0];
+      let originSortType=this.searchParams.order.split(':')[1];
+      // let newOrder='';
+      if(sortFlag===originSortFlag){
+        this.searchParams.order=`${sortFlag}:${originSortType==='asc'?'desc':'asc'}`;
+      }else{
+        this.searchParams.order=`${sortFlag}:desc`
+      }
+      this.getSearchInfo();
     }
   },
 
   computed: {
     ...mapGetters(["goodsList"]),
+    sortFlag(){
+      return this.searchParams.order.split(':')[0];
+    },
+    sortType(){
+      return this.searchParams.order.split(':')[1];
+    }
   },
   watch: {
     $route(){

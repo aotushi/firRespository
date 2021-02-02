@@ -81,7 +81,13 @@ export default {
             if(this.$route.query){
                 location.query=this.$route.query;
             }
-            this.$router.push(location);
+            // 解决搜索页面多次跳转后不能直接返回home页面
+            if(this.$route.path!=='/home'){
+                this.$router.replace(location);
+            }else{
+                this.$router.push(location);
+            }
+            
         },
         clearKeyword(){
             this.keyword="";
