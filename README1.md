@@ -23,4 +23,4 @@ yarn lint
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
-### test the email 
+### test the commit name
