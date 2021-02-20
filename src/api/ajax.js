@@ -1,6 +1,7 @@
 import axios from 'axios';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
+import store from '@/store';
 
 
 const service = axios.create({
@@ -11,6 +12,17 @@ const service = axios.create({
 service.interceptors.request.use(
     (config)=>{
     NProgress.start();
+    // 请求头内部添加临时标识,后期每个请求都会带上这个临时标识
+    let userTempId = store.state.user.userTempId;
+    if(userTempId){
+        config.headers.userTempId = userTempId;
+    };
+
+    // 登录成功之后, 需要把token添加到请求头中
+    let token = store.state.user.token;
+    if(token){
+        config.headers.token = token;
+    }
     return config;
 });
 

@@ -44,9 +44,14 @@
               >
                 <div class="list-wrap">
                   <div class="p-img">
-                    <a href="item.html" target="_blank"
-                      ><img :src="goods.defaultImg"
-                    /></a>
+                      
+                    <router-link :to="'/detail/'+goods.id">
+                      <img :src="goods.defaultImg" />
+                    </router-link>
+
+                    <!-- <a href="item.html" target="_blank">
+                      <img :src="goods.defaultImg" />
+                    </a> -->
                   </div>
                   <div class="price">
                     <strong>
@@ -55,12 +60,16 @@
                     </strong>
                   </div>
                   <div class="attr">
-                    <a
+
+                    <router-link :to="'/detail/'+goods.id">
+                      {{ goods.title }}
+                    </router-link>
+                    <!-- <a
                       target="_blank"
                       href="item.html"
                       title="促销信息，下单即赠送三个月CIBN视频会员卡！【小米电视新品4A 58 火爆预约中】"
-                      >{{ goods.title }}</a
-                    >
+                      > {{ goods.title }}</a
+                    > -->
                   </div>
                   <div class="commit">
                     <i class="command">已有<span>2000</span>人评价</i>
@@ -85,7 +94,7 @@
             :pageSize="searchParams.pageSize"
             :total="searchInfo.total"
             :continueNo="5"
-            @changePage="changePage"
+            @changePageNo="changePage"
           ></Pagination>
         </div>
       </div>
@@ -114,8 +123,8 @@ export default {
 
         // 默认搜索条件
         order: "1:asc",
-        pageNo: 5,
-        pageSize: 5,
+        pageNo: 1,
+        pageSize: 3,
       },
     };
   },
@@ -149,11 +158,11 @@ export default {
       };
       // 删除所有空字符串,不发送请求,节省带宽.
       Object.keys(searchParams).forEach((key)=>{
-        if(Object[key]===''){
+        if(searchParams[key]===''){
           // Object[key]=undefined;
           delete searchParams[key];
         }
-      })
+      });
       this.searchParams = searchParams;
     },
 
@@ -223,7 +232,7 @@ export default {
       this.searchParams.pageNo=1;
       this.getSearchInfo();
     },
-    // 点击底部页码,跳转页面
+    // 点击底部页码,跳转页面 子组件向父组件通信->自定义事件
     changePage(page){
       this.searchParams.pageNo=page;
       this.getSearchInfo();
@@ -245,7 +254,7 @@ export default {
   },
   watch: {
     $route(){
-      console.log(this.$route.params)
+      // console.log(this.$route.params)
       this.handlerSearchParams();
       this.getSearchInfo();
     },

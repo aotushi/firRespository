@@ -3,6 +3,9 @@ import Vuex from 'vuex';
 import home from './home';
 import user from './user';
 import search from './search';
+import detail from './detail';
+import shopcart from './shopcart';
+import trade from './trade';
 
 Vue.use(Vuex);
 
@@ -32,7 +35,10 @@ const store=new Vuex.Store({
     modules:{
         home,
         user,
-        search
+        search,
+        detail,
+        shopcart,
+        trade
     }
 });
 

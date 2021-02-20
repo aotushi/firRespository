@@ -18,13 +18,13 @@ const actions={
         let result = await reqBannerList();
         if(result.code===200){
             commit('RECEIVE_BANNERLIST', result.data);
-            console.log(result.data)
+            // console.log(result.data)
         }
     },
     async getFloorList({commit}){
         let result=await reqFloorList();
         if(result.code===200){
-            commit('RECEIVE_FLOORLIST', result.data);
+            commit('RECEIVE_FLOORLIST', result.data);77
         }
     }
 };

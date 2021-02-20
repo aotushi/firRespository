@@ -5,7 +5,7 @@ import 'nprogress/nprogress.css';
 
 const service = axios.create({
     baseURL:"/mock",
-    timeOUT:20000
+    timeout:20000
 });
 
 service.interceptors.request.use(

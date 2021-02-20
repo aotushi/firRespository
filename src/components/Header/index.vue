@@ -7,19 +7,23 @@
                 <div class="container">
                     <div class="loginList">
                         <p>尚品汇欢迎您！</p>
-                        <p>
+                        <p v-if="$store.state.user.userInfo.name">
                             <span>请</span>
-                            <router-link to="/login">登录</router-link>
+                            <a >{{$store.state.user.userInfo.name}}</a>
+                            <a href="javascript:;" class="register"  @click="logout">退出登录</a>
+                        </p>
+
+                         <p v-else>
+                            <span>请</span>
+                            <router-link to="/login">登录{{$store.state.user.state}}</router-link>
                             <!-- <a href="###">登录</a>
                         <a href="###" class="register">免费注册</a> -->
-                            <router-link to="registry" class="register"
-                                >免费注册</router-link
-                            >
+                            <router-link to="/register" class="register">免费注册</router-link>
                         </p>
                     </div>
                     <div class="typeList">
                         <a href="###">我的订单</a>
-                        <a href="###">我的购物车</a>
+                        <router-link to="/shopcart">我的购物车</router-link>
                         <a href="###">我的尚品汇</a>
                         <a href="###">尚品汇会员</a>
                         <a href="###">企业采购</a>
@@ -69,6 +73,7 @@ export default {
     },
     mounted(){
         this.$bus.$on('clearKeyword', this.clearKeyword);
+        // console.log(this.$store.state.user.userInfo.name)
     },
     methods: {
         toSearch() {
@@ -91,6 +96,17 @@ export default {
         },
         clearKeyword(){
             this.keyword="";
+        },
+        // 退出登录
+        async logout(){
+            try {
+                await this.$store.dispatch('getUserLogout');
+                alert('退出成功');
+                this.$router.push('/');
+            } catch (error) {
+                alert(error.message);
+            }
+            
         }
         
     },
