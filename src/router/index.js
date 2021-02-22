@@ -61,8 +61,15 @@ router.beforeEach( async(to,from,next)=>{
             }
         }
     }else{
-        // 目前不做 放行
-        next();
+        // 用户没有登录,却访问交易,支付等相关页面,需要跳转到登录页面
+        let targetPath = to.path;
+        if(targetPath.indexOf('/trade')!==-1 || targetPath.indexOf('/pay')!==-1 || targetPath.startsWith('/center')){
+            // next('/login')
+            next('/login?redirect='+targetPath);
+        }else{
+            next();
+        }
+        
     }
 
 })

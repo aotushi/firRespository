@@ -9,6 +9,13 @@ import 'swiper/css/swiper.css';
 import Pagination from '@/components/Pagination';
 import * as API from '@/api';
 import { Button, MessageBox, Message } from 'element-ui';
+import VueLazyload from 'vue-lazyload';
+import loading from '@/assets/images/loading.gif';
+import '@/utils/validate';
+
+Vue.use(VueLazyload, {
+  loading
+})
 
 // 注册element的两种方式  use + component
 // element-ui中两种组件: 第一种和button一样,可以引入然后全局注册;

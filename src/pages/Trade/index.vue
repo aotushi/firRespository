@@ -121,6 +121,17 @@
 import { mapGetters, mapState } from "vuex";
 export default {
 	name: "Trade",
+	// brforeRouteEnter(to, from, next){
+	// 	next(vue=>{
+	// 		let message = vm.message;
+	// 		if(from.path==='/shopcart'){
+	// 			next();
+	// 		}else{
+	// 			alert('只有从购物车界面才能跳转到交易页面（创建订单） ');
+	// 			next(false);
+	// 		}
+	// 	})
+	// },
 	data() {
 		return {
 			message: "",

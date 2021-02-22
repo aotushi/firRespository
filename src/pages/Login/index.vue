@@ -79,8 +79,9 @@
         let {phone, password}=this;
         try {
           await this.$store.dispatch('getUserLogin', {phone, password});
-          alert('登录成功 跳转到首页');
-          this.$router.push('/home');
+          alert('登录成功 跳转相应页面');
+          let targetPath = this.$route.query.redirect || '/';
+          this.$router.push(targetPath);
         } catch (error) {
           alert(error.message);
         }
