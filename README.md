@@ -22,8 +22,9 @@
         }
      }
     }
-* 更新.gitignore
-> 若有/dist, 删除
+* 更新.gitignore(无需操作)
+> 若有/dist 删除. 
+> 因为推送命令的原因,这一步不需要.
 
 #### 2.推送
 > 使用`git subtree push --prefix dist origin gh-pages`将dist目录推送到远程的gh-pages分支，若远程没有gh-pagse分支则会新建gh-pagse分支然后再推送。
