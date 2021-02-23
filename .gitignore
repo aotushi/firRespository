@@ -2,7 +2,8 @@
 node_modules
 静态页面
 静态组件
-dist
+
+/dist
 
 # local env files
 .env.local
