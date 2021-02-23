@@ -11,8 +11,8 @@
     ```js
     module.exports = {
     lintOnSave: false, //禁用eslint
-    assetsPublicPath:'./',
-    publicPath: process.env.NODE_ENV === 'production'? '/你的仓库名称/': '/',
+    publicPath:'./',
+    // publicPath: process.env.NODE_ENV === 'production'? '/你的仓库名称/': '/', -->
      devServer:{
         proxy: {
             "/api": {
@@ -35,12 +35,14 @@
 * mock数据失效
 > 打包后的项目时属于静态资源的，点击index.html查看项目，是无法加载mock的数据的，浏览器也会报跨域的错误。若想正常的加载mock数据，最好的方式是讲打包后的资源丢到服务器中，或者使用jsonp请求线上真实数据
 
-* 首页请求404(0)
+* 首页请求有404(0)
 
 
 
 
 #### 参考链接:
+0.[vue-cli文档-publicPath](https://cli.vuejs.org/zh/config/#publicpath)
+
 1.[vue-cli官方文档](https://cli.vuejs.org/zh/guide/deployment.html#github-pages)
 
 2.[msdn 关于vue-cli项目build后本地和github pages预览问题](https://blog.csdn.net/x550392236/article/details/80416909)
