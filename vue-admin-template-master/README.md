@@ -10,7 +10,8 @@
 * delete some files u no longer need in this branch
 * `git add .`
 * `git commit -m "some info"
-* `git push origin newBranchName`
+* `git push -u  origin newBranchName`
+  * use up, u can need `git push` commit from then on.
 
 when u finish the last step, the github will create a new branch in your repository. 
 
