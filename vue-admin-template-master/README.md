@@ -12,6 +12,6 @@
 * `git commit -m "some info"
 * `git push origin newBranchName`
 
-when u finish the last step, the github will create a new branch in your repository.
+when u finish the last step, the github will create a new branch in your repository. 
 
 > Tips: the GitHub will not compute contribution if the branch is not the master in repository.
