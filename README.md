@@ -61,11 +61,11 @@
 
 ### key points of components
 
+#### 3. [register and login](./documents/pages-register&login.md)
 
+##### 3.1 Obtain user info through token(token verification)
 
-
-
-#### 2.[pay](./documents/pages-pay)
+#### 2.[pay](./documents/pages-pay.md)
 
 ##### 2.1 install element-ui on demand and import main.js
 
@@ -81,4 +81,4 @@
 
 ##### 1.3 the element of td
 
-##### 1.4 routers 
+##### 1.4 routers
