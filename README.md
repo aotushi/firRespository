@@ -22,6 +22,7 @@
         }
      }
     }
+    ```
 * 更新.gitignore(无需操作)
 > 若有/dist 删除. 
 > 因为推送命令的原因,这一步不需要.
@@ -51,3 +52,33 @@
 3.[msdn Vue项目打包部署到GitHub Pages](https://blog.csdn.net/weixin_44670973/article/details/107130231)
 
 4.[jb51 vue项目打包后上传至GitHub并实现github-pages的预览](https://www.jb51.net/article/160778.htm)
+
+
+
+
+
+<hr>
+
+### key points of components
+
+
+
+
+
+#### 2.[pay](./documents/pages-pay)
+
+##### 2.1 install element-ui on demand and import main.js
+
+##### 2.2 install qrcode and how to use it in es6/es7
+
+##### 2.3 the flow of pay button
+
+#### 1.[paysuccess](./documents/pages-paysuccess.md)
+
+##### 1.1 default data setting
+
+##### 1.2  two styles of  using Pagination component
+
+##### 1.3 the element of td
+
+##### 1.4 routers 

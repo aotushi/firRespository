@@ -4,7 +4,7 @@ node_modules
 静态组件
 
 /dist
-
+/vue-admin-template-master
 # local env files
 .env.local
 .env.*.local
