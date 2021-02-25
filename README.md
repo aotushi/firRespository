@@ -58,8 +58,11 @@
 
 
 <hr>
-
 ### key points of components
+
+#### 4.shopcart
+
+##### 4.1 userTempId
 
 #### 3. [register and login](./documents/pages-register&login.md)
 
