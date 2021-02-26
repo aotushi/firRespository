@@ -1,18 +1,36 @@
 # vue-admin-template
 
-## How to push a new branch to a repository
 
-### 1.build a new branch in ur computer
-> in this stage, when you switch another branch, u need to git's command(add, commit) to preserve and update ur branch.
 
-* `git checkout -b newBranchName`
-* add some files u need to push
-* delete some files u no longer need in this branch
-* `git add .`
-* `git commit -m "some info"
-* `git push -u  origin newBranchName`
-  * use up, u can need `git push` commit from then on.
+### 1. [product/trademark/List.vue](./documents/view-product-trademark.md)
 
-when u finish the last step, the github will create a new branch in your repository. 
+#### 1.1 the doc format of api
 
-> Tips: the GitHub will not compute contribution if the branch is not the master in repository.
+#### 1.2 data transfer of el-table
+
+#### 1.3 el-table>el-table-column
+
+#### 1.4 pagination
+
+#### 1.5 Dialog对话框
+
+#### 1.6 Upload上传
+
+#### 1.7 修改和删除回调
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
