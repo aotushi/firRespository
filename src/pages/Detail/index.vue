@@ -382,7 +382,8 @@ import { mapGetters, mapState } from 'vuex'
         try {
           await this.$store.dispatch('addOrUpdateShopCart', {skuId, skuNum});
           alert('添加购物车成功, 准备跳转到购物车页面');
-          sessionStorage.setItem('SHOPCART_KEY', JSON.stringify(this.skuInfo))
+          sessionStorage.setItem('SKUINFO_KEY', JSON.stringify(this.skuInfo));
+          
           this.$router.push('/addcartsuccess?skuNum='+skuNum);
         } catch (error) {
           console.log(error.message)

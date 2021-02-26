@@ -50,3 +50,42 @@ service.interceptor.request.use(
 )
 ```
 
+
+
+### modify shopcart's Number
+
+```js
+//流程:
+1.手动修改商品数量按钮(加减按钮+输入框), 
+2.提交后台更新数据(后台需要的是数值更改变化的值)
+3.请求更改后商品数量的数据
+
+//解决方案:统一使用回调函数+flag参数
+@click="changeCartNum(cart, 1, true)"
+@click="changeCartNum(cart, -1, true)"
+@change="changeCartNum(cart, $event.target.value, false)"
+
+//获取数值变化的值
+changeCartNum(cart,disNum, flag){
+    let originNum = cart.skuNum;
+    if(flag){
+        //点击的是加减按钮
+        if(disNum + originNum < 1){
+            disNum = 1 -originNum;
+        }
+    }else{
+        //输入的值
+        if(disNum < 1){
+            disNum = 1 - originNum;
+        }else{
+            disNum = disNum - originNum;
+        }
+        
+    }
+}
+```
+
+
+
+
+

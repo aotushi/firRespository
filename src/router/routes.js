@@ -99,7 +99,7 @@ export default [
             // 只有携带了skuNum和sessionStorage内部有skuInfo数据  才能看到添加购物车成功的界面
             let skuNum = to.query.skuNum;
             // let skuInfo = store.state.user.token;
-            let skuInfo = sessionStorage.getItem('TOKEN_KEY');
+            let skuInfo = sessionStorage.getItem('SKUINFO_KEY');
             if(skuNum && skuInfo){
                 next();
             }else{

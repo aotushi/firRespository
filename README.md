@@ -62,7 +62,7 @@
 
 ### key points of components
 
-#### 4.[shopcart](./documents/shopcart.md)
+#### 4.[shopcart](./documents/pages-shopcart.md)
 
 ##### 4.1 userTempId
 
