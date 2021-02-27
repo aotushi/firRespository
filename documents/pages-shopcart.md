@@ -52,6 +52,39 @@ service.interceptor.request.use(
 
 
 
+### data show
+
+```js
+//1.总复选框的选中与否,使用计算属性来展示
+//2.v-model获取input输入的值类型
+
+<input class="chooseAll" type="checkbox" v-model="isCheckAll"/>
+
+isCheckAll(){
+    get(){
+        return this.cartInfoList.every((item)=> item.isChecked)
+    },
+    set(value){
+        //value是通过v-model获取的布尔值
+        try{
+            await this.$store.dispatch('getCartIsAllChecked',value?1:0);
+            alert('更新成功');
+            this.getshopCartInfo();
+        }catch(error){
+            alert(error.message);
+        }
+    }
+}
+```
+
+
+
+
+
+
+
+
+
 ### modify shopcart's Number
 
 ```js
@@ -84,6 +117,42 @@ changeCartNum(cart,disNum, flag){
     }
 }
 ```
+
+
+
+
+
+### Promise.all() 
+
+```js
+//切换总的商品选中状态,或删除多个商品.有2种解决方法:1.一次性修改多个接口;2.多次调用单次修改的接口
+
+//案例:
+1.切换单个商品的选中状态的请求
+async getCartIsCheck
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

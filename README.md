@@ -66,6 +66,10 @@
 
 ##### 4.1 userTempId
 
+##### 4.2 data show
+
+##### 4.3modify shopcart's Number
+
 #### 3. [register and login](./documents/pages-register&login.md)
 
 ##### 3.1 Obtain user info through token(token verification)
