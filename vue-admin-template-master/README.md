@@ -73,7 +73,7 @@ setting.js
 
 #### 1.7 修改和删除回调
 
-
+#### 1.8 validate of the button  '增加'
 
 
 

@@ -149,7 +149,7 @@ this.tmForm.tmName = row.tmName;
 
 
 
-### 弹出框dialog回调
+### 弹出框dialog 成功失败回调
 
 ```js
 //成功的流程
@@ -171,7 +171,7 @@ this.$API.trademark.addOrUpdate(trademark.id?this.page:1)
 ### 删除按钮回调
 
 ```js
-//使用MessageBox弹框中的'确认消息' $confirm
+//使用MessageBox弹框中的'确认消息' this.$confirm
 
 //删除成功
 1.删除成功后的提示 await this.$API.trademark.delete(row.id)
@@ -184,6 +184,61 @@ this.getTardemarkList(this.trademarkList.length>1?this.page:this.page-1)
 
 
 
+
+### '添加按钮'增加表单验证
+
+```js
+'添加'按钮 加上表单验证+自定义校验规则
+
+//表单验证
+1.规则
+ 每个要验证的字段规则都是一个数组.数组里面是对象,每个对象就是一个规则
+ 每个规则对象里包含3个:1.规则 2.错误提示信息 3.触发时机
+ 触发时机有3种: 1.失去焦点blue 2.内容改变的时候change 3.整体验证时
+2.代码
+<el-form>中添加 :rules='rules'
+data(){}中return返回对象中添加el-form-item的验证对象 rules{} 
+ 验证规则rules的格式:
+ rules:{
+     tmName(使用prop获取):[
+         {required:true, message:'报错信息', trigger:'blur'},
+         {min:3,max:5,message:'长度在3-5个字符', trigger:'blur'}
+     ]
+ }
+
+3.使用自定义校验规则代替rules中的规则
+ 需要在相应规则验规里添加配置: { validator: validatePass, trigger: 'blur' }
+ 需要在data中定义配置的函数: validatePass
+ var validateTmName = (rule, value, callback) => {
+     if (value.length<2 || value.length>20) {
+         // value就是后期验证的用户输入的数据
+         // callback是回调,如果cb调用时传递了参数,代表验证失败;如果没有传递参数,代表验证成功
+         callback(new Error("tmName长度必须是2-20之间"));
+     } else {
+         callback();
+     }
+ };
+
+4.在添加/修改按钮中,添加表单验证的回调
+ submitForm(formName) {
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            alert('submit!');
+          } else {
+            console.log('error submit!!');
+            return false;
+          }
+        });
+      },
+
+5.点击取消按钮后,将报错信息消除
+ 在取消按钮添加回调,并打上ref标记
+ <el-button @click="cancelUpload('tmForm')" ref="cancelUpload">取 消</el-button
+ cancelUpload(tmForm){
+     this.$refs[tmForm].resetFields();
+     this.dialogFormVisible = false;
+ }
+```
 
 
 
