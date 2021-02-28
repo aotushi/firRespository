@@ -77,7 +77,13 @@ setting.js
 
 
 
+### 2.[product/attr](./documents/view-product-attr.md)
 
+#### 2.1 三级分类
+
+#### 2.2 el-table如何收集数据
+
+#### 2.3 cloneDeep
 
 
 
