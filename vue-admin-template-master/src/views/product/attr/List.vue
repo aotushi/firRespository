@@ -115,9 +115,15 @@
 					>
 						<template slot-scope="{ row, $index }">
 							<el-input
+								:ref="$index"
+								v-if="row.isEdit"
 								v-model="row.valueName"
 								placeholder="请输入属性值名称"
+								@blur="toLook(row)"
+								@keyup.enter.native="toLook(row)"
+								size="mini"
 							></el-input>
+							<span v-else @click="toEdit(row, $index)" style="width:100%">{{row.valueName}}</span>
 						</template>
 					</el-table-column>
 
@@ -212,6 +218,7 @@ export default {
 			this.attrForm.attrValueList.push({
 				attrId: this.attrForm.id,
 				valueName: "",
+				isEdit:true, //这个属性值标识
 			});
 		},
 
@@ -219,7 +226,33 @@ export default {
 		showUpdateDiv(row) {
 			this.isShowList = false;
 			this.attrForm = cloneDeep(row);
+
+			this.attrForm.attrValueList.forEach((item)=>this.$set(item, 'isEdit', false));
 		},
+
+		// input失去焦点或回车,变为查看模式
+		toLook(row) {
+			// 1.失去焦点时, 需要判断数据中是否有属性值名称.如果没有值或值不合法,不会变为span
+			if(row.valueName.trim() === '') return row.valueName = '';
+			// 2.判断当前输入的值再除去自身以外,是否还有相同的属性值名称.如果存在就是重复,不能变为span
+			let isRepeat = this.attrForm.attrValueList.some(item=>{
+				if(item !== row){
+					return item.valueName === item.valueName;
+				}
+			});
+			if(isRepeat){
+				this.$message.info('输入的属性名不能重复');
+				row.valueName = '';
+				return 
+			}
+
+			row.isEdit = false;
+		},
+
+		// span点击,切换为编辑模式
+		toEdit(row) {
+			row.isEdit = true;
+		}
 	},
 };
 </script>
