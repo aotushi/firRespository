@@ -38,7 +38,7 @@
             prop="prop"
             label="操作"
             width="width">
-              <template>
+              <template slot-scope="{row, $index}">
                 <HintButton 
                 type="success"
                 icon="el-icon-plus"
@@ -51,7 +51,7 @@
                 type="warning"
                 icon="el-icon-edit"
                 size="mini"
-                title="修改SKU"
+                title="修改SPU"
                 @click="showUpdateSpuForm(row)"
               ></HintButton>
 
@@ -87,7 +87,7 @@
                 >
               </el-pagination>
       </div>
-      <SpuForm v-show="isShowSpuForm"></SpuForm>
+      <SpuForm v-show="isShowSpuForm" :visible.sync="isShowSpuForm" ref="spu"></SpuForm>
       <SkuForm v-show="isShowSkuForm"></SkuForm>
     </el-card>
 	</div>
@@ -123,6 +123,8 @@ export default {
   },
   methods:{
     handlerCategory({categoryId, level}){
+      this.isShowSpuForm=true;
+      this.$refs.spu.getUpdateSpuFormInitData({id:4});
       if(level===1){
         this.category1Id = categoryId;
 
@@ -158,13 +160,17 @@ export default {
     },
 
     // 点击添加spu会从,显示spu添加页面
-    showAddSpuForm(row){
+    showAddSpuForm(){
       this.isShowSpuForm = true;
+      // 获取子组件对象,使用子组件中的方法,发请求
+      this.$refs.spu.getAddSpuFormInitData();
     },
 
     // 点击修改spu回调,显示spu修改页面(和添加同一个页面)
     showUpdateSpuForm(row){
+      console.log(row)
       this.isShowSpuForm = true;
+      this.$refs.spu.getUpdateSpuFormInitData(row);
     },
 
     // 点击添加sku回调,显示添加sku页面
