@@ -105,3 +105,12 @@ setting.js
 
 #### 3.2 3个页面显示隐藏
 
+
+
+### 4.[product/component/SpuForm](./documents/view-product-component-spuform.md)
+
+#### 4.1 父子组件通信同步
+
+#### 4.2 el-table中数据展示收集
+
+#### 4.3 销售属性的收集
