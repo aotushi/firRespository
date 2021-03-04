@@ -62,17 +62,33 @@
 
 ### key points of components
 
+#### 5.[detail](./documents/pages-detail.md)
+
+##### 5.1 页面静态组件
+
+##### 5.2 beforeMount组件获取参数
+
+##### 5.3 获取商品购买数量
+
+
+
 #### 4.[shopcart](./documents/pages-shopcart.md)
 
 ##### 4.1 userTempId
 
 ##### 4.2 data show
 
-##### 4.3modify shopcart's Number
+##### 4.3 modify shopcart's Number
+
+##### 4.4 Promise.all()
+
+
 
 #### 3. [register and login](./documents/pages-register&login.md)
 
 ##### 3.1 Obtain user info through token(token verification)
+
+
 
 #### 2.[pay](./documents/pages-pay.md)
 
@@ -81,6 +97,8 @@
 ##### 2.2 install qrcode and how to use it in es6/es7
 
 ##### 2.3 the flow of pay button
+
+
 
 #### 1.[paysuccess](./documents/pages-paysuccess.md)
 

@@ -129,7 +129,24 @@ changeCartNum(cart,disNum, flag){
 
 //案例:
 1.切换单个商品的选中状态的请求
-async getCartIsCheck
+async getCartIsCheck({commit}, {skuId, isChecked}) {
+    const result = await reqCartIsCheck(skuId, isChecked);
+    if(result.code === 200) {
+        return 'ok';
+    }else{
+        return Promise.reject(new Error('failed'))
+    }
+}
+//2.切换总的商品选中状态
+getCartIsAllChecked({commit, getters, dispatch}, isChecked) {
+    let promises = [];
+    getters.cartInfo.cartInfoList.forEach((item)=>{
+        if(item.isChecked === isChecked) return;
+        let promise = dispatch('getCartIsCheck', {skuId:item.skuId, isChecked});
+        promises.push(promise);
+    });
+    return Promise.all(promises)
+}
 ```
 
 
