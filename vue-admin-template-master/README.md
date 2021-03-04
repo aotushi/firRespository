@@ -114,3 +114,13 @@ setting.js
 #### 4.2 el-table中数据展示收集
 
 #### 4.3 销售属性的收集
+
+
+
+#### 5. [product/components/SkuForm](./documents/view-product-sku.md)
+
+#### 5.1 数据展示和收集
+
+#### 5.2 图片排它
+
+#### 5.3 reduce方法使用
