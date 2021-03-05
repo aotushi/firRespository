@@ -117,10 +117,29 @@ setting.js
 
 
 
-#### 5. [product/components/SkuForm](./documents/view-product-sku.md)
+### 5. [product/components/SkuForm](./documents/view-product-sku.md)
 
 #### 5.1 数据展示和收集
 
 #### 5.2 图片排它
 
 #### 5.3 reduce方法使用
+
+
+
+### 6.[product/SpuForm1](./documents/view-product-spu1.md)
+
+#### 6.1 查看sku列表
+
+#### 6.2 scoped和深度作用选择器
+
+
+
+### 7.product/category
+
+#### 7.1 表格懒加载
+
+#### 7.2 表格属性结构
+
+
+
