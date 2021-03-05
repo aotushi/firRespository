@@ -87,6 +87,12 @@ export const constantRoutes = [
         name: 'Sku',
         meta: { title: 'SKU管理' }  //二级路由下没有图片icon
       },
+      {
+        path: 'category/list',
+        component: () => import('@/views/product/category/List'),
+        name: 'Category',
+        meta: { title: '分类管理' }  //二级路由下没有图片icon
+      },
     ]
   },
 

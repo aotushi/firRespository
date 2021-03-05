@@ -266,7 +266,7 @@ export default {
 			// 2.判断当前输入的值再除去自身以外,是否还有相同的属性值名称.如果存在就是重复,不能变为span
 			let isRepeat = this.attrForm.attrValueList.some((item) => {
 				if (item !== row) {
-					return item.valueName === item.valueName;
+					return item.valueName === row.valueName;
 				}
 			});
 			if (isRepeat) {
