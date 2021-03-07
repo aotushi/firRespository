@@ -62,6 +62,14 @@
 
 ### key points of components
 
+#### 6.search
+
+##### 6.1排序数据
+
+##### 6.2 分页组件
+
+##### 6.3 
+
 #### 5.[detail](./documents/pages-detail.md)
 
 ##### 5.1 页面静态组件

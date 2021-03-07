@@ -32,6 +32,13 @@ const router = new Router({
 
 
 
+### 排它实现点击按钮切换颜色
+
+```js
+//1.数组中各项的isChecked都为'0'
+//2.点击的项 isChecked为'1'
+```
+
 
 
 
