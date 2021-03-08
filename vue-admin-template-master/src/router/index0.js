@@ -54,58 +54,58 @@ export const constantRoutes = [
       meta: { title: '首页', icon: 'dashboard' }
     }]
   },
-]
-
-export const allAsyncRoutes = [
-  // 配置商品管理相关的路由
-  {
-    path: '/product', //一级路由组件只有login和layout两个,
-    component: Layout,  //显示一级路由组件架子,并且立马重定向二级路由组件
-    name: 'Product',
-    redirect: '/product/trademark/list',
-    meta: { title: '商品管理', icon: 'el-icon-s-shop' },
-    children: [
-      {
-        path: 'trademark/list',
-        component: () => import('@/views/product/trademark/List'),
-        name: 'Trademark',
-        meta: { title: '品牌管理' }  //二级路由下没有图片icon
-      },
-      {
-        path: 'attr/list',
-        component: () => import('@/views/product/attr/List'),
-        name: 'Attr',
-        meta: { title: '平台属性管理' }  //二级路由下没有图片icon
-      },
-      {
-        path: 'spu/list',
-        component: () => import('@/views/product/spu/List'),
-        name: 'Spu',
-        meta: { title: 'SPU管理' }  //二级路由下没有图片icon
-      },
-      {
-        path: 'sku/list',
-        component: () => import('@/views/product/sku/List'),
-        name: 'Sku',
-        meta: { title: 'SKU管理' }  //二级路由下没有图片icon
-      },
-      {
-        path: 'category/list',
-        component: () => import('@/views/product/category/List'),
-        name: 'Category',
-        meta: { title: '分类管理' }  //二级路由下没有图片icon
-      },
-    ]
-  },
 
   
 ]
 
-export const anyRoute = {
-  path: '*',
-  redirect: '/404',
-  hidden: true
-}
+
+// 注册异步路由
+export const allAsyncRoutes = [
+// 配置商品管理相关的路由
+{
+  path: '/product', //一级路由组件只有login和layout两个,
+  component: Layout,  //显示一级路由组件架子,并且立马重定向二级路由组件
+  name: 'Product',
+  redirect: '/product/trademark/list',
+  meta: { title: '商品管理', icon: 'el-icon-s-shop' },
+  children: [
+    {
+      path: 'trademark/list',
+      component: () => import('@/views/product/trademark/List'),
+      name: 'Trademark',
+      meta: { title: '品牌管理' }  //二级路由下没有图片icon
+    },
+    {
+      path: 'attr/list',
+      component: () => import('@/views/product/attr/List'),
+      name: 'Attr',
+      meta: { title: '平台属性管理' }  //二级路由下没有图片icon
+    },
+    {
+      path: 'spu/list',
+      component: () => import('@/views/product/spu/List'),
+      name: 'Spu',
+      meta: { title: 'SPU管理' }  //二级路由下没有图片icon
+    },
+    {
+      path: 'sku/list',
+      component: () => import('@/views/product/sku/List'),
+      name: 'Sku',
+      meta: { title: 'SKU管理' }  //二级路由下没有图片icon
+    },
+    {
+      path: 'category/list',
+      component: () => import('@/views/product/category/List'),
+      name: 'Category',
+      meta: { title: '分类管理' }  //二级路由下没有图片icon
+    },
+  ]
+},
+]
+
+// 注册任意路由,必须在最后
+export const anyRoute = {path: '*', redirect: '/404', hidden: true }
+
 
 const createRouter = () => new Router({
   // mode: 'history', // require service support

@@ -1,12 +1,7 @@
 import { login, logout, getInfo } from "@/api/user";
 import { getToken, setToken, removeToken } from "@/utils/auth";
-import {
-  allAsyncRoutes,
-  anyRoute,
-  constantRoutes,
-  resetRouter
-} from "@/router";
-import router from "@/router";
+import { resetRouter, allAsyncRoutes, anyRoute, constantRoutes } from "@/router";
+import router from '@/router'
 
 const getDefaultState = () => {
   return {
@@ -14,36 +9,26 @@ const getDefaultState = () => {
     name: "", //获取用户信息保存用户信息的名称
     avatar: "", //保存用户头像
 
-    buttons: [],
-    roles: [],
-    routes: [],
-    asyncRoutes: []
+    // 权限相关数据
+    buttons: [], //按钮相关
+    roles: [], //用户角色相关
+    routes: [], //和用户相关的所有路由配置数组
+    asyncRoutes: [] //和用户相关的所有异步路由
   };
 };
 
-// 定义函数,过滤异步数组
-// function filterMyRoutes(allAsyncRoutes, routeNames) {
-//   const myAsyncRoutes = allAsyncRoutes.filter(item => {
-//     if (routeNames.indexOf(item.name) !== -1) {
-//       if (item.children && item.children.length) {
-//         item.children = filterMyRoutes(item.children, routeNames)
-//       }
-//       return true;
-//     }
-//   })
-//   return myAsyncRoutes;
-// }
+// 定义一个函数,根据用户返回的routes路由字符串数组,过滤出用户真正的异步路由数组
 function filterMyRoutes(allAsyncRoutes, routeNames) {
-  const myAsyncRoutes = allAsyncRoutes.filter(item => {
+ const myAsyncRoutes =  allAsyncRoutes.filter(item => {
     // 判断一级路由
     if (routeNames.indexOf(item.name) !== -1) {
       // 判断二级路由,使用递归
       if (item.children && item.children.length > 0) {
-        item.children = filterMyRoutes(item.children, routeNames);
+        item.children = filterMyRoutes(item.children, routeNames)
       }
       return true;
     }
-  });
+ })
   return myAsyncRoutes;
 }
 
@@ -56,19 +41,24 @@ const mutations = {
   SET_TOKEN: (state, token) => {
     state.token = token;
   },
-
+  // SET_NAME: (state, name) => {
+  //   state.name = name
+  // },
+  // SET_AVATAR: (state, avatar) => {
+  //   state.avatar = avatar
+  // },
   SET_USERINFO: (state, userInfo) => {
     (state.name = userInfo.name),
       (state.avatar = userInfo.avatar),
-      (state.roles = userInfo.roles),
-      (state.buttons = userInfo.buttons);
+      (state.buttons = userInfo.buttons),
+      (state.roles = userInfo.roles);
   },
-
   SET_ROUTES(state, myAsyncRoutes) {
-    state.asyncRoutes = myAsyncRoutes;
-    state.routes = constantRoutes.concat(myAsyncRoutes, anyRoute);
+    state.asyncRoutes = myAsyncRoutes
+    state.routes = constantRoutes.concat(myAsyncRoutes, anyRoute)
 
-    router.addRoutes([...myAsyncRoutes, anyRoute]);
+    // 动态向路由器中添加新的路由 addRoutes方法接收的是一个数组
+    router.addRoutes([...myAsyncRoutes, anyRoute])
   }
 };
 
@@ -118,7 +108,8 @@ const actions = {
           // commit('SET_NAME', name)
           // commit('SET_AVATAR', avatar)
           commit("SET_USERINFO", data);
-          commit("SET_ROUTES", filterMyRoutes(allAsyncRoutes, data.routes));
+          // 还要根据用户信息返回来的routes,从所有的异步路由数组当中过滤出用户自己的异步路由
+          commit('SET_ROUTES', filterMyRoutes(allAsyncRoutes, data.routes))
           resolve(data);
         })
         .catch(error => {
